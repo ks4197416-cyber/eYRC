@@ -19,11 +19,11 @@
 *****************************************************************************************
 '''
 
-# Team ID:          < Team-ID >
-# Author List:      < Names of the team members who worked on this file, comma separated >
-# Filename:         ackermann_steering.py
+# Team ID:          e#YRC3576
+# Author List:      Pankaj Amrate , Karan Singh , Krishna Sharma , Prasoon Dhakad
 # Functions:        ackermann_wheel_angles
-# Global variables: < List any global variables you add, "None" if you add none >
+# Global variables: None
+
 
 
 ####################### IMPORT MODULES #######################
@@ -67,7 +67,22 @@ def ackermann_wheel_angles(delta):
     ---
     WHEEL_OFFSET changes the effective half-track width inside each wheel's triangle.
     '''
-
+    
+    # Calculate effective half-track (distance from vehicle center to kingpin axis)
+    effective_half_track = (TRACK_WIDTH / 2.0) - WHEEL_OFFSET
+    
+    # Using sin() and cos() formulations with atan2 avoids ZeroDivisionError when delta is 0
+    # Numerator represents the opposite side of the steering triangle 
+    y = WHEELBASE * math.sin(delta)
+    
+    # Denominators represent the adjacent sides of the left and right steering triangles
+    # A positive delta means turning left, so the left wheel is the inner wheel
+    x_left = (WHEELBASE * math.cos(delta)) - (effective_half_track * math.sin(delta))
+    x_right = (WHEELBASE * math.cos(delta)) + (effective_half_track * math.sin(delta))
+    
+    # Calculate the final real steering angles
+    left_angle = math.atan2(y, x_left)
+    right_angle = math.atan2(y, x_right)
 
     return left_angle, right_angle
 
