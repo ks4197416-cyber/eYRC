@@ -3,7 +3,7 @@
 Fill in `ackermann_wheel_angles(delta)` in `ackermann_steering.py`.
 
 ```sh
-conda activate NV_<Team-ID>
+conda activate NV_<3576>
 cd ~/eYRC_26-27_Niti-Vahan/task1a
 python ackermann_steering.py
 ```
